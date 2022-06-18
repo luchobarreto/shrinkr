@@ -1,0 +1,511 @@
+.shrLoginContainer {
+	display: flex;
+	height: 100vh;
+	width: 100%;
+	margin: 0 !important;
+}
+
+.shrLogin {
+	padding: 10% 10% !important;
+	display: flex;
+	flex-direction: column;
+}
+
+.shrLogin > h1 {
+	font-weight: 600;
+	font-size: 3rem;
+	margin-top: auto;
+}
+
+.shrLogin > h1 > span {
+	color: #1946e8;
+}
+
+.shrLogin > form > button {
+	margin-top: 0.7rem;
+}
+
+.shrLogin > p:last-child {
+	margin-bottom: auto;
+}
+
+.shrLogin > p > a {
+	color: #1243f0;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.shrRegisterContainer {
+	display: flex;
+	height: 100vh;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100%;
+}
+
+.shrRegister {
+	padding: 10% 10% !important;
+	display: flex;
+	flex-direction: column;
+}
+
+.shrRegister > h1 {
+	font-weight: 600;
+	font-size: 3rem;
+	margin-top: auto;
+	margin-bottom: 1.8rem;
+}
+
+.formError {
+	margin: 0;
+	color: rgb(155, 0, 0);
+	font-size: 0.9rem;
+}
+
+.shrRegisterTerms {
+	font-size: 0.75rem !important;
+	margin-top: 0.5rem;
+}
+
+.shrRegisterTerms > span {
+	color: #1243f0;
+	font-weight: 500;
+}
+
+.shrRegisterQuoteContainer {
+	display: flex;
+	background: rgb(221, 223, 255);
+	background: -moz-linear-gradient(320deg, rgba(221, 223, 255, 1) 0%, rgba(255, 255, 255, 1) 72%);
+	background: -webkit-linear-gradient(
+		320deg,
+		rgba(221, 223, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 72%
+	);
+	background: linear-gradient(320deg, rgba(221, 223, 255, 1) 0%, rgba(255, 255, 255, 1) 72%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dddfff",endColorstr="#ffffff",GradientType=1);
+}
+
+.shrRegisterQuote {
+	background: #e8ecf1;
+	padding: 3rem;
+	margin: auto;
+	height: fit-content;
+	box-shadow: #1243f0 2rem 2rem 0px;
+	display: flex;
+	flex-direction: column;
+	max-width: 400px;
+}
+
+.shrRegisterQuotePhoto {
+	height: 80px;
+	width: 80px;
+	background: url("https://i.imgur.com/Ii6gVd5.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 15px;
+	margin-bottom: 1.2rem;
+}
+
+.shrRegisterQuoteText {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.shrRegisterQuoteText > span {
+	color: #1243f0;
+}
+
+.shrRegisterQuoteName {
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 0.06rem;
+}
+
+.shrRegister > p > a {
+	color: #1243f0;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.shrRegister > p:last-child {
+	margin-bottom: auto;
+}
+
+.shrDashboardContainer {
+	display: flex;
+	min-height: 100%;
+	position: relative;
+	height: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100%;
+	flex-direction: column;
+	background: rgb(221, 223, 255);
+	background: -moz-linear-gradient(0deg, rgba(221, 223, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+	background: -webkit-linear-gradient(
+		0deg,
+		rgba(221, 223, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 100%
+	);
+	background: linear-gradient(0deg, rgba(221, 223, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dddfff",endColorstr="#ffffff",GradientType=1);
+}
+
+.shrCreateLinkContainer {
+	height: calc(70vh - 1.1rem - 1.2rem);
+	width: 100%;
+	position: relative;
+	display: flex;
+	background: rgb(255, 255, 255);
+	background: -moz-linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 50%,
+		rgba(18, 67, 240, 1) 50%,
+		rgba(18, 67, 240, 1) 100%
+	);
+	background: -webkit-linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 50%,
+		rgba(18, 67, 240, 1) 50%,
+		rgba(18, 67, 240, 1) 100%
+	);
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 50%,
+		rgba(18, 67, 240, 1) 50%,
+		rgba(18, 67, 240, 1) 100%
+	);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#1243f0",GradientType=1);
+}
+
+.shrCreateLinkContainer > h1 {
+	color: #fff;
+	font-weight: 600;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	top: calc(14.25vh - 1.1rem - 1.2rem);
+}
+
+.shrCreateLink {
+	padding: 1.5rem;
+	background: #fff;
+	border-radius: 15px;
+	max-width: 800px;
+	margin: auto;
+	width: 100%;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	display: flex;
+	flex-direction: column;
+}
+
+.shrCreateLink > button {
+	margin: 0 auto;
+}
+
+.shrInputContainer {
+	display: flex;
+}
+
+.shrInputContainer > input {
+	border-radius: 10px 0 0 10px;
+}
+
+.shrInputContainer > button {
+	padding: 0.95rem;
+	height: 100% !important;
+	margin-bottom: 0.8rem;
+	margin-top: auto;
+	border: 3px solid #1243f0 !important;
+	border-radius: 0 10px 10px 0;
+}
+
+.shrInputLabel {
+	width: 100%;
+}
+
+.shrInputContainer > label {
+	font-weight: 500;
+}
+
+.shrInput {
+	width: 100%;
+	border-radius: 10px;
+	border: 2px solid #efeff4 !important;
+	padding: 0.95rem;
+	outline: 0 !important;
+	margin-top: 0.8rem;
+}
+
+.shrInput::placeholder {
+	color: #afafb6;
+}
+
+.shrButton {
+	width: fit-content;
+	padding: 0.83rem 2.5rem;
+	background: #1243f0;
+	color: #fff;
+	border: 0;
+	outline: 0 !important;
+	border-radius: 10px;
+	font-size: 0.94rem;
+	font-weight: 500;
+	transition: ease-in 0.14s;
+	margin-bottom: 1.2rem;
+}
+
+.shrButton.shrButtonBlock {
+	width: 100%;
+}
+
+.shrButton:hover {
+	background: #0f38cc;
+}
+
+.shrLoginContainer > div:last-child {
+	background: url("https://images.unsplash.com/photo-1542866263-77e2cdc46889?auto=format&fit=crop&w=1575&q=100");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.shrShrinkButton {
+	width: 200px;
+	margin-top: auto;
+	margin-bottom: 0;
+}
+
+.shrTableContainer {
+	width: 100%;
+	display: flex;
+	transform: translateY(-15vh);
+	padding: 1rem;
+}
+
+.shrTable {
+	background: #fff;
+	padding: 2rem;
+	border-radius: 15px;
+	width: 800px;
+	box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.shrTable > h2 {
+	font-weight: 700;
+}
+
+.shrTable > h2 > span {
+	font-weight: 400;
+	font-size: 1.1rem;
+	background: rgb(221, 221, 221);
+	padding: 0.1rem 0.3rem;
+	border-radius: 5px;
+}
+
+.shrLink {
+	width: 100%;
+	display: flex;
+	margin-bottom: 0.5rem;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+	padding-bottom: 0.5rem;
+}
+
+.shrLink > span {
+	margin: auto 0;
+}
+
+.shrLinkButtons {
+	margin-left: auto;
+}
+
+.shrLinkButtons > button {
+	width: 45px;
+	height: 45px;
+	margin-left: 0.5rem;
+	background: #ffb30f;
+	color: #000;
+	border: 0;
+	border-radius: 10px;
+}
+
+.shrLinkButtons > button:first-child {
+	background: #2c57f2;
+	color: #fff;
+}
+
+.shrLinkButtons > button:last-child {
+	background: #fb3640;
+	color: #fff;
+}
+
+.shrPages {
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+.shrPages > span {
+	margin: 0 0.5rem;
+}
+
+.shrPages > button {
+	background: #1243f0;
+	color: #fff;
+	border: 0;
+	border-radius: 5px;
+	display: flex;
+	padding: 0.3rem;
+}
+
+.shrProfileContainer {
+	display: flex;
+	min-height: 100%;
+	height: 100vh;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100%;
+	flex-direction: column;
+	background: rgb(221, 223, 255);
+	background: -moz-linear-gradient(
+		200deg,
+		rgba(221, 223, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 100%
+	);
+	background: -webkit-linear-gradient(
+		200deg,
+		rgba(221, 223, 255, 1) 0%,
+		rgba(255, 255, 255, 1) 100%
+	);
+	background: linear-gradient(200deg, rgba(221, 223, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#dddfff",endColorstr="#ffffff",GradientType=1);
+}
+
+.shrProfile {
+	height: 100%;
+	width: 100%;
+	display: flex;
+}
+
+.shrProfileCard {
+	background: #fff;
+	padding: 2rem;
+	width: 800px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	margin: auto;
+	border-radius: 25px;
+}
+
+.shrProfileCard > h2 {
+	font-weight: 600;
+	width: 100%;
+	margin-bottom: 1.4rem;
+}
+
+.shrProfileData {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+.shrProfilePhoto {
+	height: 100%;
+	width: 50%;
+	position: relative;
+	display: flex;
+}
+
+.shrProfilePhoto > img {
+	width: 295px;
+	height: 295px;
+	margin: auto;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.shrProfilePhotoCover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	backdrop-filter: blur(5px);
+	flex-direction: column;
+	background: rgba(0, 0, 0, 0.35);
+	opacity: 0;
+	transition: 0.1s ease-in;
+}
+
+.shrProfilePhotoCover:hover {
+	opacity: 1;
+	display: flex;
+}
+
+.shrProfilePhotoCover > svg {
+	font-size: 4rem;
+}
+
+.shrProfileText {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 100%;
+}
+
+.shrProfileFooter {
+	display: flex;
+	width: 100%;
+}
+
+.shrProfileFooter > p {
+	margin: auto 0 auto 1rem;
+	color: rgb(155, 0, 0);
+	font-size: 0.9rem;
+}
+
+.shrModalEdit {
+	display: flex;
+	flex-direction: column;
+}
+
+.shrModalEdit > input {
+	border-radius: 10px;
+	border: 2px solid #efeff4 !important;
+	padding: 0.5rem 0.95rem;
+	outline: 0 !important;
+}
+
+.shrModalDisabledInput {
+	border-radius: 10px;
+	border: 2px solid #e3e3e6 !important;
+	padding: 0.5rem 0.95rem;
+	color: rgb(104, 104, 104);
+	outline: 0 !important;
+	background: rgb(243, 243, 243);
+}
+
+.shrDisabledPageButton {
+	background: #6985eb !important;
+}
+
+.shrDisabledPageButton:hover {
+	cursor: default;
+}

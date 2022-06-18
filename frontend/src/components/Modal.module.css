@@ -1,0 +1,55 @@
+.shrModalContainer {
+	position: fixed;
+	z-index: 5;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(5px);
+	display: flex;
+}
+
+.shrModal {
+	background: #fff;
+	padding: 1.2rem;
+	border-radius: 15px;
+	margin: auto;
+	min-width: 450px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.shrModalHeader > h2 {
+	font-size: 1.7rem;
+	font-weight: 600;
+}
+
+.shrModalBody {
+	margin: 0.5rem 0;
+}
+
+.shrModalFooter {
+	display: flex;
+}
+
+.shrModalButton {
+	padding: 0.8rem 1.5rem;
+	background: rgb(224, 224, 224);
+	border-radius: 10px;
+	border: 0;
+	outline: 0;
+	margin-right: 0.5rem;
+}
+
+.shrModalClose {
+	position: absolute;
+	z-index: 6;
+	right: 1.2rem;
+	top: 1.2rem;
+}
+
+.shrModalClose:hover {
+	cursor: pointer;
+}
