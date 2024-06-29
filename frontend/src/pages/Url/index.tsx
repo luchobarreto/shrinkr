@@ -17,7 +17,7 @@ const Url: React.FC = () => {
 	const getUrl = async () => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/urls/s/${id}`,
+				url: `${API_URL}/urls/${id}`,
 				method: "GET",
 				withCredentials: true,
 			});
@@ -29,7 +29,7 @@ const Url: React.FC = () => {
 	};
 
 	useEffect(() => {
-		if (id.length < 6) {
+		if (id.length < 5) {
 			redirectTo("/login");
 		}
 		getUrl();

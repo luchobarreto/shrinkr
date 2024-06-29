@@ -14,11 +14,12 @@ import "./App.css";
 function App() {
 	return (
 		<Router>
+			<Route path="/" exact component={Login} />
 			<Route path="/login" exact component={Login} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/dashboard" exact component={Dashboard} />
 			<Route path="/profile" exact component={Profile} />
-			<Route path="/l/:id" exact component={Url} />
+			<Route path="/urls/:id" exact component={Url} />
 		</Router>
 	);
 }

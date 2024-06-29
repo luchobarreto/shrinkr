@@ -9,10 +9,10 @@ import { DEFAULT_USER_PHOTO, API_URL } from "../config";
 import styles from "./NavBar.module.css";
 
 interface User {
-	_id: string;
+	id: string;
 	email: string;
 	name: string;
-	photo_url?: string;
+	photoUrl?: string;
 }
 
 interface props {
@@ -24,7 +24,7 @@ interface props {
 const NavBar: React.FC<props> = ({ user, isPopoverActive, setPopover }: props) => {
 	const logOut = async () => {
 		await axios({
-			url: `${API_URL}/api/users/logout`,
+			url: `${API_URL}/auth/signout`,
 			method: "POST",
 			withCredentials: true,
 		});
@@ -51,7 +51,7 @@ const NavBar: React.FC<props> = ({ user, isPopoverActive, setPopover }: props) =
 					<p>
 						{user.name} <IoIosArrowDown />
 					</p>
-					<img src={user.photo_url === "" ? DEFAULT_USER_PHOTO : user.photo_url} alt="" />
+					<img src={user.photoUrl === null ? DEFAULT_USER_PHOTO : user.photoUrl} alt="" />
 				</div>
 			</Popover>
 		</div>

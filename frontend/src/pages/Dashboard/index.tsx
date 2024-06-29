@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+ import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { FiCopy, FiDelete, FiEdit2, FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ import copy from "copy-to-clipboard";
 import { API_URL, APP_URL } from "../../config";
 
 import styles from "../styles.module.css";
-import { validateError } from "../../helpers";
+import {redirectTo, validateError} from "../../helpers";
 import { toast, ToastContainer, Slide } from "react-toastify";
 
 type Inputs = {
@@ -21,12 +21,10 @@ type Inputs = {
 };
 
 type Url = {
-	_id: string;
+	id: string;
 	url: string;
-	owner_id?: string;
-	short_id: string;
+	shortId: string;
 	views: number;
-	active?: boolean;
 	createdAt?: string;
 };
 
@@ -50,7 +48,7 @@ const Link: React.FC<any> = ({
 				<button
 					data-tip="Copy Short Link"
 					onClick={() => {
-						copy(`${APP_URL}/l/${shortId}`);
+						copy(`${APP_URL}/urls/${shortId}`);
 						toast.success("Url copied!");
 					}}
 				>
@@ -73,7 +71,6 @@ const Dashboard: React.FC = () => {
 	const [page, setPage] = useState(0);
 	const [user, setUser] = useState<any>();
 	const [urls, setUrls] = useState<Array<Url>>([]);
-	const [urlsCount, setUrlsCount] = useState(0);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [activeUrl, setActiveUrl] = useState<null | string>(null);
@@ -82,38 +79,27 @@ const Dashboard: React.FC = () => {
 	const { register, handleSubmit, setValue } = useForm<Inputs>();
 
 	const getUser = async () => {
-		try {
-			const req = await axios({
-				url: `${API_URL}/api/users`,
-				method: "GET",
-				withCredentials: true,
-			});
-
-			setUser(req.data);
-		} catch (err) {
-			validateError(err.response.data);
-		}
+		const req = await axios({
+			url: `${API_URL}/users`,
+			method: "GET",
+			withCredentials: true,
+		});
+		setUser(req.data);
 	};
 
 	const getUrls = async () => {
-		try {
-			const req = await axios({
-				url: `${API_URL}/api/urls?page=${page}&size=10`,
-				method: "GET",
-				withCredentials: true,
-			});
-			setUrlsCount(req.data.count);
-			setUrls(req.data.data);
-		} catch (err) {
-			validateError(err.response.data);
-			toast.error(err.response.error);
-		}
+		const req = await axios({
+			url: `${API_URL}/urls?page=${page}&size=10`,
+			method: "GET",
+			withCredentials: true,
+		});
+		setUrls(req.data.urls);
 	};
 
 	const createUrl: SubmitHandler<Inputs> = async (data: Inputs) => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/urls`,
+				url: `${API_URL}/urls`,
 				method: "POST",
 				data,
 				withCredentials: true,
@@ -131,25 +117,25 @@ const Dashboard: React.FC = () => {
 	const editUrl = async () => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/urls/${activeUrl}`,
+				url: `${API_URL}/urls/${activeUrl}`,
 				method: "PATCH",
 				data: { url: editedUrl },
 				withCredentials: true,
 			});
+			setActiveUrl(null);
+			setEditedUrl("");
 			setShowEditModal(false);
 			toast.success(req.data.message);
 			getUrls();
 		} catch (err) {
-			toast.error(err.response.error);
+			toast.error(err.response.data.url);
 		}
-		setActiveUrl(null);
-		setEditedUrl("");
 	};
 
 	const deleteUrl = async () => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/urls/${activeUrl}`,
+				url: `${API_URL}/urls/${activeUrl}`,
 				method: "DELETE",
 				withCredentials: true,
 			});
@@ -167,7 +153,7 @@ const Dashboard: React.FC = () => {
 	}, [page]);
 
 	useEffect(() => {
-		if (user?._id) {
+		if (user?.id) {
 			getUrls();
 		}
 	}, [user]);
@@ -224,11 +210,8 @@ const Dashboard: React.FC = () => {
 							placeholder="https://yourlongurl.com/"
 							value={editedUrl}
 							onChange={(e) => setEditedUrl(e.target.value)}
+							autoComplete="off"
 						/>
-						<label htmlFor="url">Short Id:</label>
-						<div className={styles.shrModalDisabledInput}>
-							{urls.find((url) => url._id === activeUrl)?.short_id}
-						</div>
 					</Modal>
 					<Modal
 						title="Are you sure?"
@@ -285,22 +268,22 @@ const Dashboard: React.FC = () => {
 					<div className={styles.shrTableContainer}>
 						<div className={styles.shrTable}>
 							<h2>
-								Links <span>{urlsCount}</span>
+								Links
 							</h2>
 							<div className={styles.shrLinks}>
 								{urls.map((url: Url) => (
 									<Link
 										url={url.url}
-										id={url._id}
-										shortId={url.short_id}
+										id={url.id}
+										shortId={url.shortId}
 										editUrl={() => {
 											setShowEditModal(true);
 											setEditedUrl(url.url);
-											setActiveUrl(url._id);
+											setActiveUrl(url.id);
 										}}
 										deleteUrl={() => {
 											setShowDeleteModal(true);
-											setActiveUrl(url._id);
+											setActiveUrl(url.id);
 										}}
 									/>
 								))}
@@ -319,12 +302,12 @@ const Dashboard: React.FC = () => {
 								<span>{page}</span>
 								<button
 									className={`${
-										10 + page * 10 > urlsCount
+										urls.length < 10
 											? styles.shrDisabledPageButton
 											: ""
 									}`}
 									onClick={() => {
-										if (10 + page * 10 < urlsCount) {
+										if (urls.length >= 10) {
 											setPage(page + 1);
 										}
 									}}

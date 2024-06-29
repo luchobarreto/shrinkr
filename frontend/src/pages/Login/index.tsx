@@ -25,12 +25,12 @@ const Login: React.FC = () => {
 	const getUserSession = async () => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/users`,
+				url: `${API_URL}/users`,
 				withCredentials: true,
 				method: "GET",
 			});
 
-			if (req.data._id) {
+			if (req.data.id) {
 				redirectTo("/dashboard");
 			}
 		} catch (err) {}
@@ -39,13 +39,13 @@ const Login: React.FC = () => {
 	const logIn: SubmitHandler<Inputs> = async (data: Inputs) => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/users/login`,
+				url: `${API_URL}/auth/signin`,
 				method: "POST",
 				withCredentials: true,
 				data,
 			});
 
-			if (req.status === 204) {
+			if (req.status === 200) {
 				redirectTo("/dashboard");
 			}
 		} catch (err) {
@@ -90,6 +90,7 @@ const Login: React.FC = () => {
 							transition={{ type: "tween", duration: 0.5, delay: 0.2 }}
 							type="email"
 							placeholder="Email"
+							autoComplete="off"
 							className={styles.shrInput}
 							{...register("email", { required: true })}
 						/>

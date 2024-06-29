@@ -24,6 +24,7 @@ const Profile: React.FC = () => {
 	const [showPopover, setShowPopover] = useState(false);
 	const [user, setUser] = useState<any>();
 	const [photo, setPhoto] = useState<any>();
+	const [imageFile, setImageFile] = useState<any>(null);
 
 	const {
 		register,
@@ -34,26 +35,31 @@ const Profile: React.FC = () => {
 
 	const updateUser: SubmitHandler<Inputs> = async (data: Inputs) => {
 		try {
-			const formData = new FormData();
-			formData.append("name", data.name);
-			if (data.email !== user.email) formData.append("email", data.email);
-			if (data.password) formData.append("password", data.password);
 
-			if (photo !== user.photo_url) {
-				const blob = await fetch(photo).then((r) => r.blob());
-				formData.append("photo", blob);
+			if (photo !== user.photoUrl) {
+				const formData = new FormData();
+				formData.append('file', imageFile);
+				console.log(formData.get("file"))
+				await axios.put(`${API_URL}/users/image`, formData, {
+					withCredentials: true,
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				});
+				formData.delete("file");
 			}
 
 			toast.info("Updating...");
 			const req = await axios({
-				url: `${API_URL}/api/users`,
+				url: `${API_URL}/users`,
 				method: "PATCH",
 				withCredentials: true,
-				data: formData,
+				data: {
+					name: data.name
+				},
 			});
-
+			redirectTo("/profile");
 			toast.success(req.data.message);
-			setTimeout(() => redirectTo("/profile"), 1000);
 		} catch (err) {
 			validateError(err.response.data);
 			toast.error(err.response.data.error);
@@ -63,12 +69,12 @@ const Profile: React.FC = () => {
 	const getUser = async () => {
 		try {
 			const req = await axios({
-				url: `${API_URL}/api/users`,
+				url: `${API_URL}/users`,
 				method: "GET",
 				withCredentials: true,
 			});
 
-			setPhoto(req.data.photo_url);
+			setPhoto(req.data.photoUrl);
 			setUser(req.data);
 		} catch (err) {
 			validateError(err.response.data);
@@ -76,8 +82,12 @@ const Profile: React.FC = () => {
 	};
 
 	const updatePhoto = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		const image: any = e?.target?.files?.[0];
-		setPhoto(URL.createObjectURL(image));
+		const file: any = e?.target?.files?.[0];
+		if (file) {
+			const imageUrl = URL.createObjectURL(file);
+			setPhoto(imageUrl);
+			setImageFile(file);
+		}
 	};
 
 	useEffect(() => {
@@ -113,7 +123,7 @@ const Profile: React.FC = () => {
 								onSubmit={handleSubmit(updateUser)}
 							>
 								<div className={styles.shrProfilePhoto}>
-									<img src={photo === "" ? DEFAULT_USER_PHOTO : photo} alt="" />
+									<img src={photo === null ? DEFAULT_USER_PHOTO : photo} alt="" />
 									<label
 										className={styles.shrProfilePhotoCover}
 										htmlFor="profile_picture"
@@ -129,55 +139,37 @@ const Profile: React.FC = () => {
 										onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
 											updatePhoto(e)
 										}
-										style={{ display: "none" }}
+										style={{display: "none"}}
 									/>
 									<motion.input
-										initial={{ x: "-50%", opacity: 0 }}
-										animate={{ x: "0%", opacity: 1 }}
-										transition={{ type: "tween", duration: 0.5, delay: 0.1 }}
+										initial={{x: "-50%", opacity: 0}}
+										animate={{x: "0%", opacity: 1}}
+										transition={{type: "tween", duration: 0.5, delay: 0.1}}
 										type="text"
 										placeholder="Name"
 										className={`${styles.shrInput}`}
-										{...register("name", { required: true })}
-									/>
-									<motion.input
-										initial={{ x: "-50%", opacity: 0 }}
-										animate={{ x: "0%", opacity: 1 }}
-										transition={{ type: "tween", duration: 0.5, delay: 0.2 }}
-										type="email"
-										placeholder="Email"
-										className={`${styles.shrInput}`}
-										{...register("email", { required: true })}
-									/>
-									<motion.input
-										initial={{ x: "-50%", opacity: 0 }}
-										animate={{ x: "0%", opacity: 1 }}
-										transition={{ type: "tween", duration: 0.5, delay: 0.3 }}
-										type="password"
-										placeholder="Password"
-										className={`${styles.shrInput}`}
-										{...register("password")}
+										{...register("name", {required: true})}
 									/>
 									<div className={styles.shrProfileFooter}>
 										<motion.button
-											initial={{ x: "-50%", opacity: 0 }}
-											animate={{ x: "0%", opacity: 1 }}
+											initial={{x: "-50%", opacity: 0}}
+											animate={{x: "0%", opacity: 1}}
 											transition={{
 												type: "tween",
 												duration: 0.5,
 												delay: 0.5,
 											}}
 											className={`${styles.shrButton}`}
-											style={{ marginTop: "1rem" }}
+											style={{marginTop: "1rem"}}
 										>
 											Save
 										</motion.button>
 
 										{(errors.name || errors.email) && (
 											<motion.p
-												initial={{ x: "-50%", opacity: 0 }}
-												animate={{ x: "0%", opacity: 1 }}
-												transition={{ type: "tween", duration: 0.3 }}
+												initial={{x: "-50%", opacity: 0}}
+												animate={{x: "0%", opacity: 1}}
+												transition={{type: "tween", duration: 0.3}}
 											>
 												*Name and email are required
 											</motion.p>
@@ -191,7 +183,7 @@ const Profile: React.FC = () => {
 			</Fragment>
 		);
 	} else {
-		return <LoadingScreen />;
+		return <LoadingScreen/>;
 	}
 };
 
